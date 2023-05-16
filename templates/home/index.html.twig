@@ -1,10 +1,74 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
 
-
 {% block body %}
 
+    <div class="jumbotron text-center my-5 shadow">
+        <h1 class="display-4">Bienvenue sur YesCode !</h1>
+        <p class="lead">Ici ça parle de code, langages et technos de demain </p>
+        <hr class="my-4">
+        <p>Retrouvez nos derniers articles sur les technos les plus hype du moment !</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg shadow" href="#" role="button">  &lt;/&gt; Actualités &lt;/&gt; </a>
+        </p>
+    </div>
+
+    <h2 class="text-center h1">Les derniers articles</h2>
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Symfony</h3>
+                <img height="350px"  src="https://neo7.fr/wp-content/uploads/2018/01/symfony-logo.png" alt="Card image">
+                <div class="card-body">
+                  <p class="card-text">Symfony est un framework PHP complet</p>
+                  <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                  <div class="my-3">
+                      <a href="#" class="card-link">Fabien Potencier</a>
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  Il y a 2 jours
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Angular</h3>
+                <img height="350px"  src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Card image">
+                <div class="card-body">
+                <p class="card-text">Angular le framework de Google</p>
+                <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                <div class="my-3">
+                    <a href="#" class="card-link">Angus Lard</a>
+                </div>
+                </div>
+                <div class="card-footer text-muted">
+                Il y a 2 jours
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Laravel</h3>
+                <img height="350px"  src="https://jf-blog.fr/wp-content/uploads/2018/07/laravel-logo.png" alt="Card image">
+                <div class="card-body">
+                <p class="card-text">Laravel est un framework PHP aussi</p>
+                <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                <div class="my-3">
+                    <a href="#" class="card-link">Lara Velle</a>
+                </div>
+                </div>
+                <div class="card-footer text-muted">
+                Il y a 2 jours
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
 {% endblock %}
-
-
