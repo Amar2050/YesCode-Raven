@@ -13,9 +13,9 @@ class HomeController extends AbstractController
 
         $banane = new Fruit();
         $banane->setName("Bananeuh 2.2");
-
+        dump($banane);
         return $this->render('home/index.html.twig', [
-            "fruitBanane" => $banane
+        
         ]);
     }
 
