@@ -3,25 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Fruit;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\FruitRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home_page')]
-    public function index(EntityManagerInterface $manager){
+    public function index(FruitRepository $repo){
 
-        $banana = new Fruit();
-        $banana->setName("Kiwi");
+        $fruits = $repo->findAll();
 
-        $something = new Fruit();
-        $something->setName("ArnOLJAyniREGINOother");
-
-        $manager->persist($banana);
-        $manager->persist($something);
-        $manager->flush();
-
+        dump($fruits);
+        
         return $this->render('home/index.html.twig', [
         
         ]);
