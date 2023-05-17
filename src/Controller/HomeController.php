@@ -2,15 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Fruit;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home_page')]
     public function index(){
 
-        return $this->render('home/index.html.twig', []);
+        $banane = new Fruit();
+        $banane->setName("Bananeuh 2.2");
+
+        return $this->render('home/index.html.twig', [
+            "fruitBanane" => $banane
+        ]);
     }
 
 }
