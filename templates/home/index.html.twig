@@ -15,14 +15,6 @@
     </div>
     <h2 class="text-center h1">Les derniers articles</h2>
 
-    {% set symfony = {"title": "symfony", "intro": "Symfony est un framework PHP complet", "createdAt":date(), "image":"https://neo7.fr/wp-content/uploads/2018/01/symfony-logo.png"} %}
-     
-    {% set angular = {"title": "angular", "intro": "Angular le framework de Google", "createdAt":date(), "image":"https://angular.io/assets/images/logos/angular/angular.svg"  }%}
-
-    {% set laravel = {"title": "laravel", "intro": "Laravel est un framework PHP aussi", "createdAt":date() , "image":"https://jf-blog.fr/wp-content/uploads/2018/07/laravel-logo.png"} %}
-    
-    {% set articles = {'angular':angular, 'symfony':symfony,'laravel':laravel} %}
-
     <div class="row flex-lg-row flex-xl-row flex-column">
 
         {% for article in articles %}
