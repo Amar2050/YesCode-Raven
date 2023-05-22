@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Faker;
+use Cocur\Slugify\Slugify;
 use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,19 +12,16 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home_page')]
     public function index(ArticleRepository $repo){
 
-        $faker = Faker\Factory::create();
+        $slugify = new Slugify();
 
-        $title = $faker->sentence(2); // pour titre
-        $intro = $faker->paragraph(2); 
-        $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
-        $image = "https://picsum.photos/400/300";
+        $article = $repo->findOneById(27);
+        
+        // dump($article);
+        dump($slugify->slugify($article->getTitle() . time() . hash( "sha1" , $article->getIntro())));
 
-        $createdAt = $faker->dateTimeBetween('-2 years');
-        dump($createdAt);
 
         return $this->render('home/index.html.twig', [
-            "articles" => $repo->findLastArticles(3),
-            "contenu" => $content
+            "articles" => $repo->findLastArticles(3)
         ]);
     }
 
