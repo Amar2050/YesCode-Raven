@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+<h1 class="my-5">
+    Nos articles
+</h1>
+
+<div class="row flex-lg-row flex-xl-row flex-column">
+
+        {% for article in articles %}
+
+            {% include "partials/card.article.html.twig" %}
+            
+        {% endfor %}
+        
+</div>
+{% endblock %}
