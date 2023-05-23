@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block body %}
+
+<div class="shadow border p-5 my-5">
+    <h1 class="my-5 text-center border shadow">
+        {{article.title}}
+    </h1>
+
+    <p class="text-left h4">
+        Ecris le : {{article.createdAt | date('d/m/Y à H:i')}}
+    </p>
+
+    <p class="my-5 border p-2 border shadow">
+    {{article.intro}}
+    </p>
+
+    <img width="550" class="img-fluid m-auto shadow border d-block" src="{{article.image}}" alt="Photo de l'article {{article.title}}">
+
+    <div class="my-5 shadow  border p-5">
+        <hr>
+        {{article.content | raw}}
+        <hr>
+    </div>
+
+    <hr>
+
+        <div>
+            <p class="h3 text-center p-2 shadow">
+                Soyez le premier a commenter !
+                <br>
+                <i class="fa fa-comments my-2"></i>
+            </p>
+        </div>
+</div>
+
+{% endblock %}

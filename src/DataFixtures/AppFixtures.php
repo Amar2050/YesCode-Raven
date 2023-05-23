@@ -30,10 +30,7 @@ class AppFixtures extends Fixture
             $article->setIntro( $intro);
             $article->setContent( $content);
             $article->setImage($image);
- 
             $manager->persist($article);
-    
-            // $manager->persist();
         }
 
         $manager->flush();
