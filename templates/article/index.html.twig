@@ -9,7 +9,7 @@
 
 <div class="row flex-lg-row flex-xl-row flex-column">
 
-        {% for article in articles %}
+        {% for article in articles | reverse %}
 
             {% include "partials/card.article.html.twig" %}
             

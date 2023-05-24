@@ -21,6 +21,12 @@
             Articles
           </a>
         </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ path('article_create') }}">
+            <i class="fas fa-pen"></i>
+            Ecrire un article
+          </a>
+        </li>
       </ul>
 
       {% set user = {"firstname":"amar", "lastname": "bou", "role": "admin" , 'isConnected': true} %}
@@ -36,6 +42,7 @@
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">Mon Profil</a>
                 <a class="dropdown-item" href="#">Mes articles</a>
+                <a class="dropdown-item" href="{{ path('article_create') }}">Ecrire un article</a>
 
                 {% if user.role == "admin" %}
                   <a class="dropdown-item" href="#">Espace Admin</a>
@@ -65,3 +72,14 @@
 
     </div>
   </nav>
+
+
+  {% for label,messages in app.flashes %}
+    <div class="container text-center my-5">
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message | raw }}</p>
+            {% endfor %}
+        </div>
+    </div>
+  {% endfor %}
