@@ -33,7 +33,7 @@
 							</a>
 						</td>
 						<td>
-							<form class="d-inline" action="" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette utilisateur ?');">
+							<form class="d-inline" action="{{ path('account_delete' , {'slug': user.slug } ) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette utilisateur ?');">
 								<button class="btn btn-danger">
 									<i class="fa fa-trash"></i>
 								</button>
