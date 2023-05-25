@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[HasLifecycleCallbacks]
@@ -19,15 +20,32 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'Un titre aussi court ? Minimum {{ limit }} caracteres',
+        maxMessage: "C'est trop long ! Max {{ limit }} caracteres",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\Length(
+        min: 20,
+        max: 255,
+        minMessage: 'Une intro aussi courte ? Minimum {{ limit }} caracteres',
+        maxMessage: "C'est trop long ! Max {{ limit }} caracteres",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $intro = null;
-
+    #[Assert\NotBlank(
+        message:"Ce champs ne doit pas etre vide"
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[Assert\Url(
+        message:"Ceci n'est pas une URL"
+    )]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
