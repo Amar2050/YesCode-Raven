@@ -84,5 +84,20 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
+    #[Route('/articles/{slug}/delete', name: 'article_delete')]
+    public function delete($slug, EntityManagerInterface $manager, ArticleRepository $repo)
+    {
+
+        $article = $repo->findOneBySlug($slug);
+        
+        $manager->remove($article);
+        $manager->flush();
+
+        $this->addFlash('danger',"L'article a bien été supprimé");
+      
+        return $this->redirectToRoute('articles_index');
+    }
+
     
 }
