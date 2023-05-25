@@ -14,12 +14,12 @@
 				</p>
 			</div>
 			<div>
-                <a href="" class="btn btn-info mx-2">
+                <a href="{{ path('account_edit' , {'slug': user.slug } ) }}" class="btn btn-info mx-2">
                     Modifier mon profil
                     <i class="fa fa-pen"></i>
                 </a>
             
-                <form class="d-inline" action="" 
+                <form class="d-inline" action="{{ path('account_delete' , {'slug': user.slug } ) }}" 
 					onsubmit="return confirm('Etes vous sur de vouloir supprimer cette article ?');">
                     <button class="btn btn-danger mx-2">
                             Supprimer mon profil

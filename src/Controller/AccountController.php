@@ -58,4 +58,47 @@ class AccountController extends AbstractController
             'user' => $user
         ]);
     }
+
+
+
+
+    #[Route('/account/{slug}/edit', name: 'account_edit')]
+    public function edit($slug , UserRepository $repo , Request $request, EntityManagerInterface $manager)
+    {
+
+        $user= $repo->findOneBySlug($slug);
+
+        $form = $this->createForm(AccountType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            $this->addFlash('info', 
+                            "<strong>{$user->getFirstname()}</strong> votre profil a bien été modifié");
+
+            return $this->redirectToRoute('account_profil' , [
+                'slug' => $user->getSlug()
+            ]);
+        }
+
+        return $this->render('account/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    #[Route('/account/{slug}/delete', name: 'account_delete')]
+    public function delete($slug, UserRepository $repo , EntityManagerInterface $manager)
+    {
+        $user= $repo->findOneBySlug($slug);
+        $manager->remove($user);
+        $manager->flush();
+
+        $this->addFlash('danger',"GoodBye !");
+      
+        return $this->redirectToRoute('home_page');
+    }
 }
