@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container text-center">
 		<h1 class="my-5 text-center">{{user.fullname}}</h1>
 		<div class="row">
 			<div class="col-4">
@@ -31,6 +31,29 @@
 
 		<p class="my-2 border p-2">{{user.presentation}}</p>
 
-		<img src="{{user.avatar}}" alt="photo de l'article {{user.firstname}}" width="450px">
+		<img src="{{user.avatar}}" alt="photo de l'article {{user.firstname}}" class="rounded-circle" width="450px">
+		<hr>
+		
+		{% if user.articles | length > 0 %}
+
+				<h2 class="my-5">Mes articles en lignes</h2>
+
+				<div class="row flex-lg-row flex-xl-row flex-column border bg-light">
+					{% for article in user.articles %}
+						{% include "partials/card.article.html.twig" %}
+					{% endfor %}
+				</div>
+
+			{% else %}
+
+				<div class="border text-center bg-light my-5">
+					<h2 class="my-5">Vous n'avez pas encore publié d'article !</h2>
+					<a class="nav-link text-center h2" href="{{ path('article_create') }}">
+							<i class="fa fa-pen fa-1.5x"></i>
+							Ecrire un article
+					</a>
+				</div>
+
+		{% endif %}
 	</div>
 {% endblock %}

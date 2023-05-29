@@ -14,26 +14,8 @@ class AppFixtures extends Fixture
 
         $faker = Factory::create("sq_AL");
 
-        for ($i=1; $i <= 20 ; $i++) { 
 
-        $article= new Article();
-            
-
-        $title = $faker->sentence(2); 
-        $intro = $faker->paragraph(2); 
-        $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
-        $image = "https://picsum.photos/400/300";
-
-        // $createdAt = $faker->dateTimeBetween('-2 months');
-
-           
-            $article->setTitle($title);
-            $article->setIntro( $intro);
-            $article->setContent( $content);
-            $article->setImage($image);
-            $manager->persist($article);
-        }
-
+        $users = [];
         $genres = ['male', 'female'];
 
         for ($i=0; $i <= 20 ; $i++) { 
@@ -54,8 +36,34 @@ class AppFixtures extends Fixture
                  ->setHash("password");
         
             $manager->persist($user);
+            $users[] = $user;
       
         }
+
+        for ($i=1; $i <= 20 ; $i++) { 
+
+        $article= new Article();
+            
+
+        $title = $faker->sentence(2); 
+        $intro = $faker->paragraph(2); 
+        $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
+        $image = "https://picsum.photos/400/300";
+        $author = $users[mt_rand(0, count($users) -1 )];
+        // $createdAt = $faker->dateTimeBetween('-2 months');
+
+           
+            $article->setTitle($title);
+            $article->setIntro( $intro);
+            $article->setContent( $content);
+            $article->setImage($image);
+            $article->setAuthor($author);
+
+
+            $manager->persist($article);
+        }
+
+       
 
 
         $manager->flush();
