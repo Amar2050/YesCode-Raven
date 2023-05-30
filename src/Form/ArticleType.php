@@ -2,14 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
 {
@@ -31,6 +33,10 @@ class ArticleType extends AbstractType
             ->add('image', TextType::class, [
                 "label" => "URL (adresse de l'image)",
                 "attr"  => ["placeholder" => "https://...."]
+            ])
+            ->add('author', EntityType::class, [
+                "class" => User::class,
+                "choice_label"  => "fullname"
             ])
             ->add('Envoyer', SubmitType::class)
         ;
