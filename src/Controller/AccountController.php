@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
@@ -22,7 +23,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/account/new', name: 'account_create')]
-    public function create(Request $request, EntityManagerInterface $manager) 
+    public function create(Request $request, EntityManagerInterface $manager,UserPasswordHasherInterface $encoder ) 
     {
         $user = new User();
 
@@ -31,6 +32,10 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+
+            $hash = $encoder->hashPassword($user, $user->getHash());
+            $user->setHash($hash);
+
             $manager->persist($user);
             $manager->flush();
 
@@ -63,7 +68,7 @@ class AccountController extends AbstractController
 
 
     #[Route('/account/{slug}/edit', name: 'account_edit')]
-    public function edit($slug , UserRepository $repo , Request $request, EntityManagerInterface $manager)
+    public function edit($slug , UserRepository $repo , Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $encoder)
     {
 
         $user= $repo->findOneBySlug($slug);
@@ -73,6 +78,10 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $hash = $encoder->hashPassword($user, $user->getHash());
+            $user->setHash($hash);
+
             $manager->flush();
 
             $this->addFlash('info', 
@@ -101,4 +110,17 @@ class AccountController extends AbstractController
       
         return $this->redirectToRoute('home_page');
     }
+
+
+    #[Route('/login', name: 'account_login')]
+    public function login()
+    {
+        return $this->render('account/login.html.twig', [
+           
+        ]);
+    }
+
+    #[Route('/logout', name: 'account_logout')]
+    public function logout(){}
+
 }

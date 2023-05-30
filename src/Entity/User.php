@@ -9,12 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[HasLifecycleCallbacks]
-class User
+class User implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -231,5 +232,32 @@ class User
         }
 
         return $this;
+    }
+
+    
+    public function getRoles(){
+        return ['ROLE_USER'];
+    }
+
+    public function getPassword(){
+        return $this->hash;
+    }
+    
+    
+    public function getSalt(){
+        return null;
+    }
+    
+    public function getUsername(){
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials(){
+        
+    }
+    
+
+    public function getUserIdentifier(){
+        return (string) $this->email;
     }
 }
