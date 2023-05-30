@@ -12,7 +12,9 @@
 				<p class="text-left">écris le:
 					{{ article.createdAt | date('d/m/Y à H:i') }}
 				</p>
-			</div>
+			</div> 
+			{% if app.user and app.user == article.author %}
+			
 			<div>
 				<a href="{{ path('article_edit' , {'slug': article.slug } ) }}" class="btn btn-info mx-2">
 					Modifier l'article
@@ -27,7 +29,7 @@
 				</form>
 			</div>
 		</div>
-
+		{% endif %}
 		<p class="my-2 border p-2">{{article.intro}}</p>
 		<div class="shadow p-3">
 			<img src="{{article.image}}" alt="photo de l'article {{article.title}}" width="450px">

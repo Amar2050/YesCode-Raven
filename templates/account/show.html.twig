@@ -13,6 +13,7 @@
 					{{ user.email}}
 				</p>
 			</div>
+			{% if user is same as(app.user) %}
 			<div>
                 <a href="{{ path('account_edit' , {'slug': user.slug } ) }}" class="btn btn-info mx-2">
                     Modifier mon profil
@@ -27,6 +28,7 @@
                     </button>
                 </form>
 			</div>
+			{% endif %}
 		</div>
 
 		<p class="my-2 border p-2">{{user.presentation}}</p>

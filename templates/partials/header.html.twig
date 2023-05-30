@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark bg-primary">
 
-    <a class="navbar-brand" href="{{path('home_page')}}">YesCode</a>
+    <a class="navbar-brand text-danger" href="{{path('home_page')}}">YesCode</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
       aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,12 +21,16 @@
             Articles
           </a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="{{ path('article_create') }}">
-            <i class="fas fa-pen"></i>
-            Ecrire un article
-          </a>
-        </li>
+        {% if app.user %}
+        
+            <li class="nav-item ">
+            <a class="nav-link" href="{{ path('article_create') }}">
+                <i class="fas fa-pen"></i>
+                Ecrire un article
+            </a>
+            </li>
+
+        {% endif %}
       </ul>
 
       <ul class="navbar-nav ml-auto">
