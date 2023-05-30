@@ -34,10 +34,6 @@ class ArticleType extends AbstractType
                 "label" => "URL (adresse de l'image)",
                 "attr"  => ["placeholder" => "https://...."]
             ])
-            ->add('author', EntityType::class, [
-                "class" => User::class,
-                "choice_label"  => "fullname"
-            ])
             ->add('Envoyer', SubmitType::class)
         ;
     }
