@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard
+{% endblock %}
+
+{% block body %}
+	<h1 class="my-5 p-3 bg-light shadow text-center col-4">
+		Tableau de bord
+	</h1>
+
+
+	<div class="alert alert-success col-4 text-center shadow">
+		<a href="{{path("users_list")}}">
+			<p>{{ users | length }}
+				Utilisateurs</p>
+			<i class="fa fa-user mx-2 fa-2x"></i>
+		</a>
+	</div>
+	<div class="alert alert-warning col-4 text-center shadow">
+		<a href="{{path("articles_list")}}">
+			<p>{{ articles | length }}
+				Articles</p>
+			<i class="fa fa-newspaper mx-2 fa-2x"></i>
+		</a>
+	</div>
+	<div class="alert alert-info col-4 text-center shadow">
+		<a href="{{path("app_category_index")}}">
+			<p>{{ categories | length }}
+				Categories</p>
+			<i class="fa fa-tag mx-2 fa-2x"></i>
+		</a>
+		<br>
+
+        <a href="{{path("app_category_new")}}">
+		    <i class="fas fa-plus fa-2x mx-2">C</i>
+        </a>
+        <a href="{{path("app_category_index")}}">
+		    <i class="fas fa-eye fa-2x mx-2">R</i>
+        </a>
+        
+		
+		    
+	</div>
+
+{% endblock %}

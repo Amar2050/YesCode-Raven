@@ -6,6 +6,7 @@ use Faker\Factory;
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -21,7 +22,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager){
 
-        $faker = Factory::create("fr_FR");
+
+        $faker = Factory::create("ma_MA");
 
         $adminRole = new Role();
         $adminRole->setTitle("ROLE_ADMIN");
@@ -37,8 +39,6 @@ class AppFixtures extends Fixture
                   ->setPresentation("Moi un User pas comme les autres...fixtures")
                   ->addUserRole($adminRole);
         $manager->persist($adminUser);
-
-
 
         $users = [];
         $genres = ['male', 'female'];
@@ -65,6 +65,14 @@ class AppFixtures extends Fixture
       
         }
 
+        $categories = [];
+        for ($i=0; $i < 5; $i++) { 
+            $category = new Category();
+            $category->setName($faker->sentence(1));
+            $manager->persist($category);
+            $categories[] = $category;
+        }
+
         for ($i=1; $i <= 20 ; $i++) { 
 
         $article= new Article();
@@ -75,6 +83,7 @@ class AppFixtures extends Fixture
         $content ="<p>" . implode("</p><p>",$faker->paragraphs(5)) . "<p>" ; 
         $image = "https://picsum.photos/400/300";
         $author = $users[mt_rand(0, count($users) -1 )];
+        $category = $categories[mt_rand(0, count($categories) -1 )];
         // $createdAt = $faker->dateTimeBetween('-2 months');
 
            
@@ -83,6 +92,7 @@ class AppFixtures extends Fixture
             $article->setContent( $content);
             $article->setImage($image);
             $article->setAuthor($author);
+            $article->setCategory($category);
 
 
             $manager->persist($article);

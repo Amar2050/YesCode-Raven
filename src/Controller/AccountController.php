@@ -16,15 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
-    #[IsGranted('ROLE_ADMIN')]
-    #[Route('/account', name: 'users_list')]
-    public function index(UserRepository $repo): Response
-    {
-        return $this->render('account/index.html.twig', [
-            'users' => $repo->findAll()
-        ]);
-    }
-
+    
     #[Route('/account/new', name: 'account_create')]
     public function create(Request $request, EntityManagerInterface $manager,UserPasswordHasherInterface $encoder ) 
     {

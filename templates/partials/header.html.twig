@@ -46,8 +46,8 @@
                 <a class="dropdown-item" href="#">Mes articles</a>
                 <a class="dropdown-item" href="{{ path('article_create') }}">Ecrire un article</a>
 
-                {% if app.user.roles == "admin" %}
-                  <a class="dropdown-item" href="{{ path('users_list') }}">Espace Admin</a>
+                {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                  <a class="dropdown-item" href="{{ path('dashboard') }}">Espace Admin</a>
                 {% endif %}
 
 

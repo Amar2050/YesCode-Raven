@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+    <h1 class="my-5">Category index</h1>
+
+     <p class="alert alert-primary p-2 my-3 text-center col-3">
+			<a href="{{path("dashboard")}}">
+
+				Retour au tableau de bord
+			</a>
+		</p>
+
+    <table class="table table-hover border text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th colspan="2">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a href="{{ path('app_category_edit', {'id': category.id}) }}"> <i class="fas fa-pen"> </a>
+                </td>
+                <td>
+                    <a href="{{ path('app_category_delete', {'id': category.id}) }}"> <i class="fas fa-trash"> </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_category_new') }}">Create new</a>
+{% endblock %}

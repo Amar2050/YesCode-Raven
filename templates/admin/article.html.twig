@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class="my-5">Liste des articles</h1>
+
+		<p class="alert alert-primary p-2 my-3 text-center col-3">
+			<a href="{{path("dashboard")}}">
+
+				Retour au tableau de bord
+			</a>
+		</p>
+		<table class="table table-hover border text-center">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>cover</th>
+					<th>titre</th>
+					<th>intro</th>
+					<th>categorie</th>
+					<th colspan="2">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for article in articles | reverse %}
+					<tr class="table">
+						<td>{{article.id}}</td>
+						<td>
+							<img src="{{article.image}}" width="60px" class="rounded">
+						</td>
+						<td>{{article.title}}</td>
+						<td>{{article.category.name}}</td>
+						<td>
+							<a href="{{ path('article_show' , {'slug': article.slug } ) }}" class="btn btn-primary">
+								<i class="fas fa-eye"></i>
+							</a>
+						</td>
+						<td>
+							<form class="d-inline" action="{{ path('article_delete' , {'slug': article.slug } ) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette utilisateur ?');">
+								<button class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+					<tr>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+
+	</div>
+
+{% endblock %}
