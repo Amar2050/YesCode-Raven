@@ -9,10 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/articles', name: 'articles_index')]
     public function index(ArticleRepository $repo): Response{
 
@@ -57,9 +60,9 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
+    #[Security("is_granted('ROLE_USER') and user === article.getAuthor()")]
     #[Route('/articles/{slug}/edit', name: 'article_edit')]
-    public function edit($slug, Request $request, EntityManagerInterface $manager,ArticleRepository $repo)
+    public function edit($slug, Article $article ,Request $request, EntityManagerInterface $manager,ArticleRepository $repo)
     {
 
         $article = $repo->findOneBySlug($slug);
